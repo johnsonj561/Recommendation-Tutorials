@@ -18,7 +18,7 @@ def log(mssg):
 
 spark = SparkSession.builder\
     .appName('movie-recs')\
-    .master('local[8]')\
+    .master('yarn-client')\
     .getOrCreate()
 log('Session created')
 
@@ -27,7 +27,7 @@ log('Session created')
 df = spark.read \
     .option("header", "true") \
     .format("csv")\
-    .load('../data/movielens/small_rating.csv')
+    .load('gs://movielens-ratings/edited_rating.csv.gz')
 log('Data loaded')
 
 
